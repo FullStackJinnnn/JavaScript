@@ -268,3 +268,215 @@ const person = {
   
   person2.fullName = 'James Bond'
   console.log(person2.fullName);
+
+  //getter setter은 객체 지향 프로그래밍. 일종의 메서드라고 보면된다.
+  //Getter 객체송성을 반환 Setter는 객체 속성 값을 설정.
+  // 바로접근하는게 아닌 get (), set () 메서드를 통해 경유해서 설정하도록 하는 기법
+  // 객체 내부 속성에 직접 접근하지 않아 객체의 정보 은닉을 가능하게 해줌.
+  // 코드의 안전성 유지보수성 높일 수 있다는 장점.
+  // 옳지않은 값 넣으려고 할때 이를 미연에 방지.
+  
+
+  // 배열
+  const objects = [{ name: '멍멍스' }, { name : '야옹스'}];
+
+
+  objects.push({
+    name: '멍뭉멍뭉'
+  });
+
+  console.log(objects);
+  console.log(objects[0]);
+  console.log(objects[1]);
+
+  console.log(objects.length);
+
+  // 반복문
+
+  for (let i = 0 ; i < 10 ; i ++ ){
+    console.log(i);
+  }
+
+  //배열과 for
+  
+  for (let i = 0; i < objects.length; i++){
+
+    console.log(objects[i]);
+  }
+
+let i = 0;
+while (i < 10) {
+    console.log(i);
+    i++;
+}
+
+//for...of 문은 배열에 관한 반복문을 돌리기 위한것
+
+
+let matrix = [10, 20, 30, 40, 50];
+for (let number of matrix) {
+  console.log(number);
+}
+
+//객체의 정보를 배열 형태로 받아올 수 있는 함수
+
+const doggy = {
+    name: '멍멍이',
+    sound: '멍멍',
+    age: 2
+  };
+  
+  console.log(Object.entries(doggy)); // -> [[키,값]. [키, 값]] 형태로 변환
+  console.log(Object.keys(doggy));
+  console.log(Object.values(doggy));
+
+  for (let key in doggy) {
+    console.log(`${key}: ${doggy[key]}`);
+  }
+
+  for (let i = 0; i < 10; i++) {
+    if (i === 2) continue; // 다음 루프를 실행
+    console.log(i);
+    if (i === 5) break; // 반복문을 끝내기
+  }
+
+  // i 가 2일땐 continue 를 하여 원래 console.log 를 해야하지만 스킵하고 3으로 넘아감.
+
+  // 배열을 파라미터로 받아서 총합 구하는 함수만들기!!!!!!
+
+  function MatrixSum(numbers2){
+    let sum = 0;
+    for (i = 0 ; i < numbers2.length ; i ++) {
+        sum += numbers2[i];
+    }
+return sum;
+}
+const result = MatrixSum([1,2,3,4,5]);
+console.log(result);
+
+// 배열 내장함수
+
+//for each -> 우리가 배웠던 for 문을 대체 시킬 수 있다.`
+
+const superheroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+
+for (let i = 0; i < superheroes.length; i++) {
+    console.log(superheroes[i]);
+  }
+
+superheroes.forEach(hero => { // hero는 각 원소를 기리킨다.
+    console.log(hero);
+  });
+  //콜백함수라고 부른다.
+
+const array = [1, 2, 3, 4, 5, 6, 7, 8]; // map은 배열 안의 각 원소를 변환 할 때 사용 되며, 이 과장에서 새로운 배열이 만들어진다.
+//각 숫자 제곱
+const squared = [];
+for (let i = 0; i < array.length; i++) {
+  squared.push(array[i] * array[i]);
+}
+console.log(squared);
+
+//forEach 사용
+
+const squared2 = [];
+
+array.forEach(n => {
+  squared2.push(n * n);
+});
+
+console.log(squared2);
+
+//map 함수 사용 
+
+const square = n => n * n;
+const squared_map = array.map(square);
+console.log(squared_map);
+
+//map 함수의 파라미터로는 변화를 주는 함수를 전달
+// 이름을 붙여서 선언 할 필요는 없다
+//const squared = array.map(n => n * n);
+//console.log(squared); 
+
+// indoxOf 원하는 항목이 몇번째 원소인지 찾아준다.
+const index = superheroes.indexOf('토르');
+console.log(index);
+
+// 배열 안에 있는 값이 객체이거나, 배열일때 findIndex
+
+const todos = [
+    {
+      id: 1,
+      text: '자바스크립트 입문',
+      done: true
+    },
+    {
+      id: 2,
+      text: '함수 배우기',
+      done: true
+    },
+    {
+      id: 3,
+      text: '객체와 배열 배우기',
+      done: true
+    },
+    {
+      id: 4,
+      text: '배열 내장함수 배우기',
+      done: false
+    }
+  ];
+
+const index2 = todos.findIndex(todo => todo.id === 3);
+console.log(index2);
+const todo = todos.find(todo => todo.id ===3); //find 값 자체를 가져옴
+console.log(todo);
+const tasksNotDone = todos.filter(todo => todo.done === false); //특정 조건을 만족하는 값만 추출 (todo => !todo.done);도 가능
+console.log(tasksNotDone);
+
+// splice 몇번째 index인지 확인 후 항목 제거
+
+superheroes.splice(index, 1); // 토르를 지움
+console.log(superheroes);
+
+//slice는 배열을 잘라내지만 기본 배열은 건들지 않는다
+const sliced = superheroes.slice(0,2);
+
+console.log(sliced);
+console.log(superheroes);
+
+const numbers3 = [10, 20, 30, 40];
+const value2 = numbers3.shift(); // 첫번째 원소를 배열에서 추출 ( 추출하는 과정에서 원소 사라진다.)
+console.log(value2);
+console.log(numbers3);
+
+const value3 = numbers3.pop(); //맨 마지막 항목 추출
+console.log(value3);
+console.log(numbers3);
+
+// unshift 새원소 추가
+numbers3.unshift(5);
+console.log(numbers3);
+
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const concated = arr1.concat(arr2); // 여러개의 배열을 하나의 배열로 합침
+
+console.log(concated);
+// join 은 배열 안의 값들을 문자열 형태로 합쳐줌
+console.log(arr1.join()); // 1,2,3,4,5
+console.log(arr1.join(' ')); // 1 2 3 4 5
+console.log(arr1.join(', ')); // 1, 2, 3, 4, 5
+
+//reduce 함수에는 두개의 파라미터를 전달
+//첫번째 파라미터는 accumulator 와 current 를 파라미터로 가져와서 결과를 반환하는 콜백함수
+//두번째 파라미터는 reduce 함수에서 사용 할 초깃값입니다.
+//여기서 accumulator 는 누적된 값을 의미합니다.
+
+const numbers4 = [1, 2, 3, 4, 5];
+let sum2 = numbers4.reduce((accumulator, current) => {
+  console.log({ accumulator, current });
+  return accumulator + current;
+}, 0);
+
+console.log(sum2);
