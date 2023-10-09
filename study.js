@@ -480,3 +480,92 @@ let sum2 = numbers4.reduce((accumulator, current) => {
 }, 0);
 
 console.log(sum2);
+
+//프로토타입과 클래스
+
+function Animal(type, name, sound) {
+  this.type = type;
+  this.name = name;
+  this.sound = sound;
+  this.say = function() {
+    console.log(this.sound);
+  };
+}
+
+
+const dog2 = new Animal('개', '멍멍이', '멍멍');
+const cat2 = new Animal('고양이', '야옹이', '야옹');
+
+dog2.say();
+cat2.say();
+
+//같은 객체 생성자 함수를 사용하는 경우, 특정 함수 또는 값을 재사용 할 수 있는데 이게 바로 프로토타입
+
+Animal.prototype.say = function() {
+  console.log(this.sound);
+};
+Animal.prototype.sharedValue =1;
+
+
+dog2.say();
+cat2.say();
+
+console.log(dog2.sharedValue);
+console.log(cat2.sharedValue);
+
+
+// Cat DOg라는 새로운 객체 생성자에서 Animal 기능을 재사용 할때 call 사용
+// function Dog(name, sound) {
+//   Animal.call(this, '개', name, sound);
+// }
+// Dog.prototype = Animal.prototype;
+
+// function Cat(name, sound) {
+//   Animal.call(this, '고양이', name, sound);
+// }
+
+//dog.prototype = Animal.prototype;
+//cat.prototype = Animal.prototype;
+
+//클래스 
+
+class Animal2 {
+  constructor(type, name, sound) {
+    this.type = type;
+    this.name = name;
+    this.sound = sound;
+  }
+  say() {
+    console.log(this.sound);
+  }
+}
+
+const dog3 = new Animal2('개', '멍멍이', '멍멍');
+const cat3 = new Animal2('고양이', '야옹이', '야옹');
+
+dog3.say();
+cat3.say();
+
+//say 함수를 클래스 내부에 선언 '메서드' 라고 부른다.
+//이렇게 만든 메서드는 자동으로 prototype으로 등록
+//다른 클래스 쉽게 상속 가능
+
+class Dog3 extends Animal2 {
+  constructor(name, sound) {
+    super('개', name, sound);
+  }
+}
+
+class Cat3 extends Animal2 {
+  constructor(name, sound) {
+    super('고양이', name, sound);
+  }
+}
+
+const dog4 = new Dog3('멍멍이', '멍멍');
+const cat4 = new Cat3('야옹이', '야옹');
+
+dog4.say();
+cat4.say();
+
+//상속을 할 때는 extends 키워드를 사용, constructor에서 사용하는 super() 함수가 상속받은 클래스의 생성자를 가르킴
